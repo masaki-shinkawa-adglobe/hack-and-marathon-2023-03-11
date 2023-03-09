@@ -7,6 +7,8 @@ services:
       dockerfile: docker/Dockerfile
     ports:
       - ${APP_PORT:-3000}:3000
+    tty: true
+    stdin_open: true
     volumes:
       - ${FRONTEND_CONTEXT}:/app
       - node_modules_volume:/app/node_modules:delegated
