@@ -1,17 +1,22 @@
 version: "3.8"
 
 services:
-  app:
+  nuxt:
+    container_name: nuxt
     build:
       context: ${FRONTEND_CONTEXT}
-      dockerfile: docker/Dockerfile
+      dockerfile: ../docker/frontend/Dockerfile
     ports:
       - ${APP_PORT:-3000}:3000
+      - ${APP_PORT:-24678}:24678 # HMR用のポート
     tty: true
     stdin_open: true
     volumes:
-      - ${FRONTEND_CONTEXT}:/app
-      - node_modules_volume:/app/node_modules:delegated
+      - ${FRONTEND_CONTEXT}:/workspace:cached
+      - node_modules_volume:/workspace/node_modules
+    environment:
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
 
 volumes:
   node_modules_volume:
