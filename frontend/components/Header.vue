@@ -1,17 +1,10 @@
 <template>
-  <nav
-    x-data="{ isOpen: false }"
-    class="relative bg-base shadow "
-  >
+  <nav x-data="{ isOpen: false }" class="fixed bg-base shadow w-full">
     <div class="container px-6 mx-auto">
       <div class="lg:flex lg:items-center lg:justify-between">
         <div class="flex items-center justify-between">
           <NuxtLink href="/">
-            <img
-              class="w-auto h-6 sm:h-7"
-              src="~/assets/img/logo.png"
-              alt=""
-            />
+            <img class="w-auto h-6 sm:h-7" src="~/assets/img/logo.png" alt="" />
           </NuxtLink>
 
           <!-- Mobile menu button -->
@@ -108,24 +101,52 @@
     </div>
     <SearchModal
       :is-modal-open="isModalOpen"
+      :tags="tags"
+      :popular-tags="popularTags"
       @handle-close="handleModalClose"
       @handle-submit="handleModalSubmit"
+      @handle-add-tags="handleAddTags"
+      @handle-delete-tags="handleDeleteTags"
     />
   </nav>
 </template>
 
 <script lang="ts" setup>
+interface Response {
+  tags: {
+    tag: string;
+    image: string;
+  }[];
+}
+
 const isOpen = ref(false);
 const isModalOpen = ref(false);
+
+const tags = ref<string[]>([]);
+const { data } = await useFetch<Response>("http://localhost/api/tags");
+const popularTags = data.value?.tags?.map((tag) => tag.tag) ?? [];
+
 const handleModalOpen = () => {
   isModalOpen.value = !isModalOpen.value;
-}
+};
 const handleModalClose = () => {
   isModalOpen.value = false;
-}
+};
 const handleModalSubmit = () => {
-  console.log("submit")
-}
+  console.log("submit");
+  const query = tags.value
+    .map((tag) => {
+      return `tags=${tag}`;
+    })
+    .join("&");
+  location.href = `http://localhost:3000/posts?${query}`;
+};
+const handleAddTags = (tag: string) => {
+  tags.value = [...tags.value, tag];
+};
+const handleDeleteTags = (tag: string) => {
+  tags.value = tags.value.filter((_tag) => tag !== _tag);
+};
 </script>
 
 <style scoped lang="sass"></style>

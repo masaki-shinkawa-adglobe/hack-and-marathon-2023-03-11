@@ -7,10 +7,10 @@
         v-for="comment in data.comments"
         :name="comment.name"
         :comment="comment.comment"
-        :date="comment.updated_at"
+        :date="comment.date"
       />
     </div>
-    <CommentInput :id="id" />
+    <CommentInput :id="id" @update="refresh" />
   </div>
 </template>
 
@@ -27,9 +27,10 @@ interface CommentsResponse {
 
 const { params } = useRoute();
 const id = Number(params.id);
-const { data, pending } = await useFetch<CommentsResponse>(
+const { data, pending, refresh } = await useFetch<CommentsResponse>(
   `http://localhost/api/posts/${params.id}/comment`
 );
+
 </script>
 
 <style scoped lang="sass"></style>
