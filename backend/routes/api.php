@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // 投稿一覧
+// Route::get('/posts', [App\Http\Controllers\PostController::class, "index"]);
 Route::get('/posts', function (Request $request) {
     return [
         "posts" => [
@@ -36,13 +37,15 @@ Route::get('/posts', function (Request $request) {
 });
 
 // 投稿
-Route::post('/posts', function (Request $request) {
-    return [
-        "postId" => 1
-    ];
-});
+Route::post('/posts', [App\Http\Controllers\PostController::class, "store"]);
+// Route::post('/posts', function (Request $request) {
+//     return [
+//         "postId" => 1
+//     ];
+// });
 
 // 投稿詳細
+// Route::get('/posts/{postId}', [App\Http\Controllers\PostController::class, "show"]);
 Route::get('/posts/{postId}', function (Request $request) {
     return [
         "id" => 1,
