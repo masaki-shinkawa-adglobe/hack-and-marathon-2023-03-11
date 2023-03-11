@@ -14,7 +14,7 @@ class GetCommentListController
     {
         $comment = new PostComment();
 
-        $response = $comment->getComment();
+        $response = $comment->getComment($request->input('postId'));
 
         return $response;
     }
