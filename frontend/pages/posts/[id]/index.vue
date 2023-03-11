@@ -26,46 +26,38 @@
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
-interface Response {
+interface PostsResponse {
   id: number;
   title: string;
-  images: { base64: string; isLike: boolean; likeCount: number }[];
+  images: { id: number; base64: string; isLike: boolean; likeCount: number }[];
   isBookmark: boolean;
   bookmarkCount: number;
   tags: string[];
   date: string;
 }
 
-const data = ref<Response>({
-  id: 1,
-  title: "hogehoge",
-  images: [
-    {
-      base64: "https://placehold.jp/150x150.png",
-      isLike: false,
-      likeCount: 10,
-    },
-    {
-      base64: "https://placehold.jp/150x150.png",
-      isLike: false,
-      likeCount: 10,
-    },
-    {
-      base64: "https://placehold.jp/150x150.png",
-      isLike: false,
-      likeCount: 10,
-    },
-  ],
-  isBookmark: false,
-  bookmarkCount: 0,
-  tags: ["aaa", "bbb"],
-  date: "2022-01-01T01:01:01",
-});
+interface LikeResponse {
+  isLike: boolean;
+  likeCount: number;
+}
 
+const route = useRoute();
+const { data } = await useFetch<PostsResponse>(
+  `http://localhost/api/posts/${route.params.id}`
+);
 const carousel = ref(null);
 
-const handleLike = (status: boolean) => {
-  data.value.images[carousel.value?.data.currentSlide.value].isLike = status;
+const handleLike = async (isLike: boolean) => {
+  if (!data.value?.id) return;
+  const image = data.value.images[carousel.value?.data.currentSlide.value];
+  const { data: likeResponse } = await useFetch<LikeResponse>(
+    `http://localhost/api/images/${image.id}/like`,
+    {
+      body: { isLike },
+    }
+  );
+  data.value.images[carousel.value?.data.currentSlide.value].isLike =
+    likeResponse.value?.isLike ?? false;
 };
 </script>
 
