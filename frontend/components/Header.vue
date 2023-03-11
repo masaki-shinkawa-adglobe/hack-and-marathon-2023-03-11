@@ -18,6 +18,7 @@
 
           <!-- Mobile menu button -->
           <div class="flex lg:hidden">
+            <SearchButton class="m-2" />
             <button
               x-cloak
               @click="isOpen = !isOpen"

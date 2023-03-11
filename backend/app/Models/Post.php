@@ -19,4 +19,14 @@ class Post extends Model
     {
         return $this->hasMany(PostImage::class);
     }
+
+    public function tags()
+    {
+        return $this->hasMany(PostTag::class);
+    }
+
+    public function bookmark()
+    {
+        return $this->hasOne(PostBookmark::class);
+    }
 }
