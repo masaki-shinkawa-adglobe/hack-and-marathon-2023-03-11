@@ -80,11 +80,6 @@
               class="px-3 py-2 mx-3 mt-2 text-main transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-base"
               >アップロード</NuxtLink
             >
-            <NuxtLink
-              href="/posts/ranking"
-              class="px-3 py-2 mx-3 mt-2 text-main transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-base"
-              >ランキング</NuxtLink
-            >
           </div>
 
           <div class="flex items-center mt-4 lg:mt-0">

@@ -10,6 +10,7 @@
           :image="post.image"
           :isBookmark="post.isBookmark"
           :date="post.date"
+          @update="refresh"
         />
       </div>
     </main>
@@ -17,8 +18,6 @@
 </template>
 
 <script lang="ts" setup>
-import { LocationQueryValue } from "vue-router";
-
 interface PostsResponseInterface {
   posts: {
     id: number;
@@ -36,7 +35,12 @@ const query = computed(() => {
   const query: any = {};
   query.title = route.query.title?.[0]?.toString() || undefined;
   query.isBookmark = route.query.isBookmark?.[0]?.toString() || undefined;
-  if (!route.query.tags?.length || !route.query.tags[0]?.toString()) return [];
+  if (!route.query.tags?.length || !route.query.tags[0]?.toString())
+    return query;
+  if (!Array.isArray(route.query.tags)) {
+    query["tags[]"] = route.query.tags;
+    return query;
+  }
   for (let index = 0; index < route.query.tags.length; index++) {
     const tag = route.query.tags[index];
     if (tag) {
@@ -46,7 +50,11 @@ const query = computed(() => {
   return query;
 });
 
-const { data: res, pending } = useFetch<PostsResponseInterface>("http://localhost/api/posts", {
+const {
+  data: res,
+  pending,
+  refresh,
+} = useFetch<PostsResponseInterface>("http://localhost/api/posts", {
   query: query.value,
 });
 </script>
