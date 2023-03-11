@@ -77,12 +77,13 @@ Route::post('/posts/{postId}/bookmark', [App\Http\Controllers\updateBookmarkCont
 // });
 
 // いいね切り替え
-Route::post('/images/{imageId}/like', function (Request $request) {
-    return [
-        "isLike" => true,
-        "likeCount" => 1
-    ];
-});
+Route::post('/images/{imageId}/like', [App\Http\Controllers\updateLikeController::class, 'execute']);
+// Route::post('/images/{imageId}/like', function (Request $request) {
+//     return [
+//         "isLike" => true,
+//         "likeCount" => 1
+//     ];
+// });
 
 // ハッシュタグ一覧
 Route::get('/tags', function (Request $request) {

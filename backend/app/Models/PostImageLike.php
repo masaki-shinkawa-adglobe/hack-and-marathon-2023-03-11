@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PostImageLike extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
+    protected $guarded = [];
+
+    public function getCountByimageId($imageId)
+    {
+        return $this->where('post_image_id', $imageId)->count();  
+    }
 }
