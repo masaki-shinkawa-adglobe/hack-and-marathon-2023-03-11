@@ -24,14 +24,9 @@ class PostController extends Controller
         }
 
         if (count($request->tags ?? []) > 0) {
-            $query = $query->whereHas(
-                "tags",
-                function ($q) use ($request) {
-                    foreach ($request->tags as $tag) {
-                        $q = $q->orWhere("tag", $tag);
-                    }
-                }
-            );
+            foreach ($request->tags as $tag) {
+                $query = $query->whereHas("tags", fn ($q) => $q->where("tag", $tag));
+            }
         }
 
         return [
@@ -41,7 +36,7 @@ class PostController extends Controller
                 "detail" => $item->detail,
                 "image" => $item->images()->first(),
                 "isBookmark" => $item->bookmark()->exists(),
-                "date" => $item->created_at
+                "date" => $item->created_at,
             ])
         ];
     }
