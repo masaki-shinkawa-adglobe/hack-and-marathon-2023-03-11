@@ -63,6 +63,7 @@ class PostController extends Controller
             "title" => $post->title,
             "images" => $post->images()->get()->map(fn ($item) => [
                 "id" => $item->id,
+                "base64" => $item->base64,
                 "isLike" => $item->likes()->where("user_id", 1)->exists(),
                 "likeCount" => $item->likes()->count(),
             ]),
