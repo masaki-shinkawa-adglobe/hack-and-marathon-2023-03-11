@@ -17,8 +17,14 @@ class GetCommentListController extends Controller
     {
         $comment = new PostComment();
 
-        $response = $comment->getComments($postId);
-
+        $comments = $comment->getComments($postId);
+        $response = $comments->map(function($val) {
+            return [
+                'comment' => $val->comment,
+                'name' => $val->user->name,
+                'date' => $val->created_at->format('Y-m-d H:i:s')
+            ];
+        });
         return ['comments' => $response];
     }
 }
