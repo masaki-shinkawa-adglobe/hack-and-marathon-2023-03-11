@@ -1,5 +1,5 @@
 <template>
-  <nav x-data="{ isOpen: false }" class="relative bg-base shadow">
+  <nav x-data="{ isOpen: false }" class="fixed bg-base shadow w-full">
     <div class="container px-6 mx-auto">
       <div class="lg:flex lg:items-center lg:justify-between">
         <div class="flex items-center justify-between">
