@@ -87,7 +87,7 @@ interface PostsRequestInterface {
 }
 
 interface PostsResponseInterface {
-  postId: string;
+  id: string;
 }
 
 const images = ref<string[]>([]);
@@ -144,7 +144,7 @@ const upload = async () => {
     body,
   });
   const router = useRouter();
-  router.push(`/posts/${data.postId}`);
+  router.push(`/posts/${data.id}`);
 };
 </script>
 

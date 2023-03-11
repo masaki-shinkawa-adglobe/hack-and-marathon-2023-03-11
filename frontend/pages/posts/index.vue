@@ -33,8 +33,8 @@ const route = useRoute();
 
 const query = computed(() => {
   const query: any = {};
-  query.title = route.query.title?.[0]?.toString() || undefined;
-  query.isBookmark = route.query.isBookmark?.[0]?.toString() || undefined;
+  query.title = route.query.title?.toString() || undefined;
+  query.isBookmark = route.query.isBookmark?.toString() || undefined;
   if (!route.query.tags?.length || !route.query.tags[0]?.toString())
     return query;
   if (!Array.isArray(route.query.tags)) {
@@ -55,7 +55,7 @@ const {
   pending,
   refresh,
 } = useFetch<PostsResponseInterface>("http://localhost/api/posts", {
-  query: query.value,
+  query,
 });
 </script>
 
