@@ -3,7 +3,7 @@
     <div v-show="props.isModalOpen" class="fixed inset-0 z-10 overflow-y-auto">
       <div class="w-full h-full fixed bg-black opacity-25"></div>
       <div
-        class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0 w-full"
+        class="flex items-center justify-center min-h-screen px-4 py-8 pb-20 text-center sm:block sm:p-0 w-full"
       >
         <span
           class="hidden sm:inline-block sm:align-middle sm:h-screen"
@@ -11,7 +11,7 @@
           >&#8203;</span
         >
         <div
-          class="w-full relative flex flex-col px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl rtl:text-right sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6"
+          class="w-full relative flex flex-col px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl rtl:text-right sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6 max-h-[80vh]"
         >
           <div class="flex gap-2">
             <input
@@ -27,7 +27,7 @@
               <img class="w-8 h-8" src="~/assets/img/plus.svg" />
             </button>
           </div>
-          <div class="flex-1">
+          <div class="flex-1 overflow-y-scroll">
             <div class="mt-2">
               <div class="flex gap-2 flex-wrap">
                 <button
