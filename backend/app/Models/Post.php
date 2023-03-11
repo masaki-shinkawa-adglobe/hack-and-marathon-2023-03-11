@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
+    protected $fillable = [
+        "user_id",
+        "title",
+        "detail",
+    ];
+
+    public function images()
+    {
+        return $this->hasMany(PostImage::class);
+    }
 }
