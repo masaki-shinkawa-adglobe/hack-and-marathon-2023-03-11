@@ -62,5 +62,18 @@ class PostController extends Controller
     // 投稿詳細
     public function show(Request $request, int $postId)
     {
+        $post = Post::find($postId);
+        return [
+            "id" => $post->id,
+            "title" => $post->title,
+            "images" => $post->images()->get()->map(fn ($item) => [
+                "id" => $item->id,
+                "isLike" => $item->likes()->where("user_id", 1)->exists(),
+                "likeCount" => $item->likes()->count(),
+            ]),
+            "isBookmark" => $post->bookmark()->exists(),
+            "tags" => $post->tags()->get()->map(fn ($item) => $item->tag),
+            "date" => $post->created_at,
+        ];
     }
 }
