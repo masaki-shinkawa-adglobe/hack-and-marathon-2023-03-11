@@ -44,6 +44,9 @@ class PostController extends Controller
     // 投稿
     public function store(Request $request)
     {
+        $matches = [];
+        preg_match_all("/#(?P<tag>\S+)/", $request->detail, $matches);
+
         $post = Post::create([
             "user_id" => 1,
             "title" => $request->title,
@@ -51,7 +54,8 @@ class PostController extends Controller
         ]);
 
         $post->images()->createMany(array_map(fn ($image) => ["base64" => $image], $request->images));
-        return $post->id;
+        $post->tags()->createMany(array_map(fn ($tag) => ["tag" => $tag], $matches["tag"]));
+        return ["id" => $post->id];
     }
 
     // 投稿詳細
