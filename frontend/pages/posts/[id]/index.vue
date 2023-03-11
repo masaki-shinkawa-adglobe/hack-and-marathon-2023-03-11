@@ -3,7 +3,7 @@
     <Header />
     <Carousel ref="carousel" :items-to-show="1" class="bg-main">
       <slide v-for="image in data.images" :key="image.base64">
-        <div class="h-[calc(100vh_-_56px)] w-screen flex items-center bg-main">
+        <div class="h-[calc(100vh_-_40px)] w-screen flex items-center bg-main">
           <LikeButton
             class="absolute top-1 right-1"
             :is-like="image.isLike"

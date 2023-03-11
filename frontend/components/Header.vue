@@ -3,22 +3,20 @@
     x-data="{ isOpen: false }"
     class="relative bg-base shadow "
   >
-    <div class="container px-6 py-4 mx-auto">
+    <div class="container px-6 mx-auto">
       <div class="lg:flex lg:items-center lg:justify-between">
         <div class="flex items-center justify-between">
-          <a href="#">
+          <NuxtLink href="/">
             <img
               class="w-auto h-6 sm:h-7"
-              src="https://merakiui.com/images/full-logo.svg"
+              src="~/assets/img/logo.png"
               alt=""
             />
-          </a>
-
-          aaa
+          </NuxtLink>
 
           <!-- Mobile menu button -->
           <div class="flex lg:hidden">
-            <SearchButton class="m-2" />
+            <SearchButton @handle-click="handleModalOpen" class="m-2" />
             <button
               x-cloak
               @click="isOpen = !isOpen"
@@ -69,7 +67,7 @@
               ? 'translate-x-0 opacity-100 '
               : 'opacity-0 -translate-x-full',
           ]"
-          class="absolute inset-x-0 z-20 w-full mt-4 px-6 py-4 transition-all duration-300 ease-in-out bg-base lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"
+          class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-base lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"
         >
           <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
             <NuxtLink
@@ -113,11 +111,26 @@
         </div>
       </div>
     </div>
+    <SearchModal
+      :is-modal-open="isModalOpen"
+      @handle-close="handleModalClose"
+      @handle-submit="handleModalSubmit"
+    />
   </nav>
 </template>
 
 <script lang="ts" setup>
 const isOpen = ref(false);
+const isModalOpen = ref(false);
+const handleModalOpen = () => {
+  isModalOpen.value = !isModalOpen.value;
+}
+const handleModalClose = () => {
+  isModalOpen.value = false;
+}
+const handleModalSubmit = () => {
+  console.log("submit")
+}
 </script>
 
 <style scoped lang="sass"></style>
