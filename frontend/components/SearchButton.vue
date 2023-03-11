@@ -6,7 +6,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div>
+  <div class="flex items-center">
     <button @click="handleClick"><img src="~/assets/img/search.svg" class="w-6 h-6"></button>
   </div>
 </template>
