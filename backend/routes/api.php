@@ -85,6 +85,7 @@ Route::post('/images/{imageId}/like', function (Request $request) {
 });
 
 // ハッシュタグ一覧
+// Route::get('/tags', [App\Http\Controllers\TagController::class, 'index']);
 Route::get('/tags', function (Request $request) {
     return [
         "tags" => [
@@ -119,8 +120,8 @@ Route::get('/posts/{postId}/comment', function (Request $request) {
     ];
 });
 
-// Route::post('/posts/{postId}/comment', [App\Http\Controllers\PostCommentController::class, 'store']);
 // コメント投稿
+// Route::post('/posts/{postId}/comment', [App\Http\Controllers\PostCommentController::class, 'store']);
 Route::post('/posts/{postId}/comment', function (Request $request) {
     return "";
 });
