@@ -86,7 +86,7 @@ Route::get('/tags', function (Request $request) {
 });
 
 // コメント一覧
-Route::get('/posts/{postId}/comment', [App\Http\Controllers\getCommentListController::class, 'list']);
+Route::get('/posts/{postId}/comment', [App\Http\Controllers\GetCommentListController::class, 'list']);
 // Route::get('/posts/{postId}/comment', function (Request $request) {
 //     return [
 //         "comments" => [

@@ -24,9 +24,14 @@ class PostComment extends Model
 
     public function getComments(int $postId) : ?object
     {
-        return DB::table($this->table)
+        return $this
+            ->with('user')
             ->where('post_id', $postId)
-            ->whereNull('deleted_at')
             ->get();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    } 
 }

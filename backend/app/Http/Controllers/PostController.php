@@ -51,7 +51,7 @@ class PostController extends Controller
         ]);
 
         $post->images()->createMany(array_map(fn ($image) => ["base64" => $image], $request->images));
-        return $request;
+        return $post->id;
     }
 
     // 投稿詳細
