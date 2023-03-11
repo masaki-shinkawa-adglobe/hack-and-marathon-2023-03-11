@@ -125,7 +125,7 @@ Route::get('/posts/{postId}/comment', [App\Http\Controllers\getCommentListContro
 // });
 
 // コメント投稿
-// Route::post('/posts/{postId}/comment', [App\Http\Controllers\PostCommentController::class, 'store']);
-Route::post('/posts/{postId}/comment', function (Request $request) {
-    return "";
-});
+Route::post('/posts/{postId}/comment', [App\Http\Controllers\PostCommentController::class, 'store']);
+// Route::post('/posts/{postId}/comment', function (Request $request) {
+//     return "";
+// });

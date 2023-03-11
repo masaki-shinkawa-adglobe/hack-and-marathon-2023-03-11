@@ -12,7 +12,7 @@ class PostCommentController extends Controller
     /**
      * コメント投稿
      */
-    public function store(Request $request, int $postId): int
+    public function store(Request $request, int $postId): bool
     {
         $parameters = [
             'user_id' => $request->input('userId'),
@@ -22,10 +22,7 @@ class PostCommentController extends Controller
             'updated_at' => Carbon::now()
         ];
 
-        $comment = new PostComment();
-
-        $id = $comment->insertGetId($parameters);
-
-        return $id;
+        $comment = PostComment::create($parameters);
+        return true;
     }
 }

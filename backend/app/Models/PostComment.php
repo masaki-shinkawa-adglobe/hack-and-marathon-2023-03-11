@@ -12,6 +12,14 @@ class PostComment extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        "user_id",
+        "post_id",
+        "comment",
+        "created_at",
+        "updated_at"
+    ];
+
     protected $table = 'post_comments';
 
     public function getComments(int $postId) : ?object
