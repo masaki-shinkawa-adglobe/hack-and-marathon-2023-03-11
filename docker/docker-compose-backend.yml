@@ -1,0 +1,123 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: ${PROJECT_NAME_BACKEND}-nginx
+    build:
+      context: ./backend/nginx/
+    ports:
+      - "80:80"
+      - "3001:80"
+      - "443:443"
+    volumes:
+      - ./backend/:/usr/share/nginx/html
+      - ./backend/nginx/config/nginx.conf:/etc/nginx/nginx.conf
+      - ./backend/nginx/certs:/etc/ssl/certs
+    depends_on:
+      - php
+    networks:
+      - common
+
+  php:
+    container_name: ${PROJECT_NAME_BACKEND}-php
+    build:
+      context: ./backend/php/
+    environment:
+      APP_ENV: local
+      DB_HOST: ${PROJECT_NAME_BACKEND}-mysql
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      AWS_ACCESS_KEY_ID: minio
+      AWS_SECRET_ACCESS_KEY: minio123
+    volumes:
+      - ../backend/:/usr/share/nginx/html
+      - ./backend/php/config/php.ini:/etc/php.ini
+      - ./backend/php/config/php-fpm.conf:/etc/php-fpm.conf
+      - ./backend/php/config/www.conf:/etc/php-fpm.d/www.conf
+    networks:
+      - common
+
+  mysql:
+    container_name: ${PROJECT_NAME_BACKEND}-mysql
+    build:
+      context: ./backend/mysql/
+    restart: always
+    hostname: localhost
+    environment:
+      HOSTNAME: localhost
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: Asia/Tokyo
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - ./backend/mysql/config/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./backend/mysql/config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+      - dbdata-storage:/var/lib/mysql
+    networks:
+      - common
+
+  minio:
+    container_name: ${PROJECT_NAME_BACKEND}-minio
+    image: minio/minio:RELEASE.2020-11-19T23-48-16Z
+    ports:
+      - "9090:9000"
+    entrypoint: sh
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+      TZ: Asia/Tokyo
+    command: -c "
+      mkdir -p /export/data;
+      /usr/bin/minio server /export;"
+    networks:
+      - common
+
+  redis:
+    container_name: ${PROJECT_NAME_BACKEND}-redis
+    image: redis:5.0.6
+    ports:
+      - "6379:6379"
+    networks:
+      - common
+
+  redis-commander:
+    container_name: ${PROJECT_NAME_BACKEND}-redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - common
+
+  phpmyadmin:
+    container_name: ${PROJECT_NAME_BACKEND}-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: ${DB_USERNAME}
+      PMA_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8001:80"
+    depends_on:
+      - mysql
+    networks:
+      - common
+
+volumes:
+  dbdata-storage:
+    driver: local
+networks:
+  common:
+    name: prj-network
+    driver: bridge
+
