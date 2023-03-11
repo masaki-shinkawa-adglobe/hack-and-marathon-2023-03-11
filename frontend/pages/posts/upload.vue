@@ -3,7 +3,7 @@
     <Header />
     <div
       v-if="images.length === 0"
-      class="aspect-square flex justify-center items-center bg-main"
+      class="aspect-square flex justify-center items-center bg-main pt-10"
     >
       <img class="w-1/3 bg-main" src="~/assets/img/image.svg" alt="" />
     </div>

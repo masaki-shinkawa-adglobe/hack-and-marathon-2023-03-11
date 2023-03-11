@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen bg-base flex flex-col">
     <Header />
-    <div class="m-2 flex-1">
+    <div class="m-2 flex-1 pt-10">
       <Comment
         v-if="!pending && data"
         v-for="comment in data.comments"

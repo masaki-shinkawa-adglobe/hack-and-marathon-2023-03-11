@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <Carousel ref="carousel" :items-to-show="1" class="bg-main">
+    <Carousel ref="carousel" :items-to-show="1" class="bg-main pt-10">
       <slide v-for="image in data.images" :key="image.base64">
         <div class="h-[calc(100vh_-_40px)] w-screen flex items-center bg-main">
           <LikeButton
