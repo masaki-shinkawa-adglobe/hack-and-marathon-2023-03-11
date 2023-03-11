@@ -1,17 +1,20 @@
 <template>
   <NuxtLink
     :href="`/posts/${props.id}`"
+    :tabindex="props.id"
     role="link"
     class="w-full bg-base"
   >
     <img
-      class="w-full"
+      class="w-full max-w-md aspect-square"
       :src="props.image"
       alt="postImage" />
-    <div>
+    <div class="text-main m-2">
       {{props.title}}
     </div>
-    <div>
+    <!-- TODO:コメントボタン -->
+    <!-- TODO:ブックマークボタン -->
+    <div class="text-main text-xs m-2">
       {{props.detail}}
     </div>
   </NuxtLink>
