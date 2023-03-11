@@ -1,19 +1,25 @@
 <?php
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\PostComment;
+use Carbon\Carbon;
 
-class PostCommentController
+class PostCommentController extends Controller
 {
     /**
      * コメント投稿
      */
-    public function store(Request $request): int
+    public function store(Request $request, int $postId): int
     {
         $parameters = [
             'user_id' => $request->input('userId'),
-            'post_id' => $request->input('postId'),
-            'comment' => $request->input('comment')
+            'post_id' => $postId,
+            'comment' => $request->input('comment'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ];
 
         $comment = new PostComment();

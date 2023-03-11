@@ -18,6 +18,7 @@ class PostComment extends Model
     {
         return DB::table($this->table)
             ->where('post_id', $postId)
+            ->whereNull('deleted_at')
             ->get();
     }
 }
