@@ -139,10 +139,6 @@ const upload = async () => {
     detail: detail.value,
     images: images.value,
   };
-  // const { data } = await useFetch<PostsResponseInterface>("/api/posts", {
-  //   method: "POST",
-  //   body,
-  // });
   const data = await $fetch<PostsResponseInterface>("http://localhost/api/posts", {
     method: "POST",
     body,
