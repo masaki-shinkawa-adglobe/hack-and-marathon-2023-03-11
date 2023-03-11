@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PostBookmark extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
+    protected $guarded = [];
+
 }

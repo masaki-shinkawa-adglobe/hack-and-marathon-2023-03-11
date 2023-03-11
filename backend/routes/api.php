@@ -69,12 +69,12 @@ Route::get('/posts/{postId}', function (Request $request) {
     ];
 });
 
-// Route::post('/posts/{postId}/bookmark', [App\Http\Controllers\updateBookmarkController::class, 'execute']);
-Route::post('/posts/{postId}/bookmark', function (Request $request) {
-    return [
-        "isBookmark" => true,
-    ];
-});
+Route::post('/posts/{postId}/bookmark', [App\Http\Controllers\updateBookmarkController::class, 'execute']);
+// Route::post('/posts/{postId}/bookmark', function (Request $request) {
+//     return [
+//         "isBookmark" => true,
+//     ];
+// });
 
 // いいね切り替え
 Route::post('/images/{imageId}/like', function (Request $request) {
@@ -101,26 +101,26 @@ Route::get('/tags', function (Request $request) {
 });
 
 // コメント一覧
-// Route::get('/posts/{postId}/comment', [App\Http\Controllers\getCommentListController::class, 'list']);
-Route::get('/posts/{postId}/comment', function (Request $request) {
-    return [
-        "comments" => [
-            [
-                "comment" => "コメント1",
-                "name" => "山田",
-                "date" => "2023-03-11T12:34:56+09:00"
-            ],
-            [
-                "comment" => "コメント2",
-                "name" => "田中",
-                "date" => "2023-03-11T12:34:56+09:00"
-            ],
-        ]
-    ];
-});
+Route::get('/posts/{postId}/comment', [App\Http\Controllers\getCommentListController::class, 'list']);
+// Route::get('/posts/{postId}/comment', function (Request $request) {
+//     return [
+//         "comments" => [
+//             [
+//                 "comment" => "コメント1",
+//                 "name" => "山田",
+//                 "date" => "2023-03-11T12:34:56+09:00"
+//             ],
+//             [
+//                 "comment" => "コメント2",
+//                 "name" => "田中",
+//                 "date" => "2023-03-11T12:34:56+09:00"
+//             ],
+//         ]
+//     ];
+// });
 
-// Route::post('/posts/{postId}/comment', [App\Http\Controllers\PostCommentController::class, 'store']);
-// コメント投稿
-Route::post('/posts/{postId}/comment', function (Request $request) {
-    return "";
-});
+Route::post('/posts/{postId}/comment', [App\Http\Controllers\PostCommentController::class, 'store']);
+// // コメント投稿
+// Route::post('/posts/{postId}/comment', function (Request $request) {
+//     return "";
+// });
