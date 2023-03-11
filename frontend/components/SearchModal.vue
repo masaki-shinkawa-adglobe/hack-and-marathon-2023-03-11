@@ -1,6 +1,7 @@
 <template>
   <teleport to="body">
     <div v-show="props.isModalOpen" class="fixed inset-0 z-10 overflow-y-auto">
+      <div class="w-full h-full fixed bg-black opacity-25"></div>
       <div
         class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0 w-full"
       >
@@ -39,8 +40,9 @@
                 </button>
               </div>
               <div class="flex my-2 items-center">
-                <img class="w-5 h-5" src="~/assets/img/tag.svg" alt="">
-                <p>人気ハッシュタグ</p></div>
+                <img class="w-5 h-5" src="~/assets/img/tag.svg" alt="" />
+                <p>人気ハッシュタグ</p>
+              </div>
               <div class="flex gap-2 flex-wrap">
                 <button
                   v-for="tag in popularTags"
@@ -102,6 +104,7 @@ const handleClickDeleteTag = (tag: string) => {
   emit("handleDeleteTags", tag);
 };
 const handleAddInput = () => {
+  if (input.value === "") return;
   handleClickAddTag(input.value);
   input.value = "";
 };
