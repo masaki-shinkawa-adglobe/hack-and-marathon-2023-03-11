@@ -3,6 +3,7 @@
     <input
       type="text"
       placeholder="コメントを送信"
+      v-model="comment"
       class="flex-1 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
     />
     <button
@@ -18,11 +19,37 @@
 interface Comment {
   id: number;
 }
+interface PostsRequestInterface {
+  userId: Number;
+  comment: string;
+}
+interface PostsResponseInterface {
+  postId: string;
+}
 
 const props = defineProps<Comment>();
+const comment = ref("");
+const error = ref("");
 
-const submit = () => {
-  console.log();
+const submit = async () => {
+  error.value = "";
+  if (comment.value.length <= 0) {
+    return (error.value = "タイトルが入力されていません。");
+  }
+
+  const body: PostsRequestInterface = {
+    userId: 1,
+    comment: comment.value,
+  };
+  if (!props.id) return;
+  const data = await $fetch<PostsResponseInterface>(
+  `http://localhost:3001/api/posts/${props.id}/comment`,
+    {
+      method: 'POST',
+      body
+    }
+  );
+  location.reload();
 }
 </script>
 
