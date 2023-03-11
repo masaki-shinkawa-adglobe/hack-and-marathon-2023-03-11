@@ -45,14 +45,19 @@ Route::get('/posts/{postId}', function (Request $request) {
     return "";
 });
 
-// ブックマーク切り替え
+// Route::post('/posts/{postId}/bookmark', [App\Http\Controllers\updateBookmarkController::class, 'execute']);
 Route::post('/posts/{postId}/bookmark', function (Request $request) {
-    return "";
+    return [
+        "isBookmark" => true
+    ];
 });
 
 // いいね切り替え
 Route::post('/images/{imageId}/like', function (Request $request) {
-    return "";
+    return [
+        "isLike" => true,
+        "likeCount" => 19
+    ];
 });
 
 // ハッシュタグ一覧
