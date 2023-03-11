@@ -32,10 +32,13 @@
               <div class="flex gap-2 flex-wrap">
                 <button
                   v-for="tag in tags"
-                  class="flex items-center px-4 py-2 font-medium tracking-wide text-main border border-accent capitalize transition-colors duration-300 transform bg-base rounded-lg hover:bg-base focus:outline-none focus:ring focus:ring-base focus:ring-opacity-80"
+                  class="flex items-center px-4 py-2 font-medium tracking-wide text-main border border-accent capitalize transition-colors duration-300 transform bg-base rounded-lg hover:bg-base focus:outline-none focus:ring focus:ring-base focus:ring-opacity-80 max-w-full"
                   @click="() => handleClickDeleteTag(tag)"
                 >
-                  <span class="mx-1">#{{ tag }}</span>
+                  <span
+                    class="mx-1 max-w-[95%] overflow-hidden text-ellipsis whitespace-nowrap"
+                    >#{{ tag }}</span
+                  >
                   <img class="w-5 h-5 mx-1" src="~/assets/img/cross.svg" />
                 </button>
               </div>
@@ -46,10 +49,10 @@
               <div class="flex gap-2 flex-wrap">
                 <button
                   v-for="tag in popularTags"
-                  class="flex items-center px-4 py-2 font-medium tracking-wide text-main border border-accent capitalize transition-colors duration-300 transform bg-base rounded-lg hover:bg-base focus:outline-none focus:ring focus:ring-base focus:ring-opacity-80"
+                  class="flex items-center px-4 py-2 font-medium tracking-wide text-main border border-accent capitalize transition-colors duration-300 transform bg-base rounded-lg hover:bg-base focus:outline-none focus:ring focus:ring-base focus:ring-opacity-80 max-w-full"
                   @click="() => handleClickAddTag(tag)"
                 >
-                  <span class="mx-1">#{{ tag }}</span>
+                  <span class="mx-1 max-w-[95%] overflow-hidden text-ellipsis whitespace-nowrap">#{{ tag }}</span>
                 </button>
               </div>
             </div>
