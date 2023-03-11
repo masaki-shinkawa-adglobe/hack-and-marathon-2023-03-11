@@ -7,7 +7,7 @@
         v-for="comment in data.comments"
         :name="comment.name"
         :comment="comment.comment"
-        :date="comment.updated_at"
+        :date="comment.date"
       />
     </div>
     <CommentInput :id="id" />
