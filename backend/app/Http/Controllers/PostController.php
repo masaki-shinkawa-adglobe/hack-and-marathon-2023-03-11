@@ -34,7 +34,7 @@ class PostController extends Controller
                 "id" => $item->id,
                 "title" => $item->title,
                 "detail" => $item->detail,
-                "image" => $item->images()->first(),
+                "image" => $item->images()->first()?->base64,
                 "isBookmark" => $item->bookmark()->exists(),
                 "date" => $item->created_at,
             ])
