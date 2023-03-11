@@ -16,7 +16,7 @@
 
           <!-- Mobile menu button -->
           <div class="flex lg:hidden">
-            <SearchButton class="m-2" />
+            <SearchButton @handle-click="handleModalOpen" class="m-2" />
             <button
               x-cloak
               @click="isOpen = !isOpen"
@@ -111,11 +111,26 @@
         </div>
       </div>
     </div>
+    <SearchModal
+      :is-modal-open="isModalOpen"
+      @handle-close="handleModalClose"
+      @handle-submit="handleModalSubmit"
+    />
   </nav>
 </template>
 
 <script lang="ts" setup>
 const isOpen = ref(false);
+const isModalOpen = ref(false);
+const handleModalOpen = () => {
+  isModalOpen.value = !isModalOpen.value;
+}
+const handleModalClose = () => {
+  isModalOpen.value = false;
+}
+const handleModalSubmit = () => {
+  console.log("submit")
+}
 </script>
 
 <style scoped lang="sass"></style>
