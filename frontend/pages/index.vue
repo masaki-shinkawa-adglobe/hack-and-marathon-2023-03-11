@@ -15,11 +15,12 @@
 </template>
 
 <script lang="ts" setup>
+interface Tag {
+  tag: string;
+  image: string;
+}
 interface Response {
-  tags: {
-    tag: string;
-    image: string;
-  }[];
+  tags: Tag[];
 }
 
 const { data: res, pending } = await useFetch<Response>(
@@ -28,7 +29,7 @@ const { data: res, pending } = await useFetch<Response>(
 
 const tags = computed(() => {
   if (!res.value) return [];
-  return res.value.tags.reduce((_tags, _tag) => {
+  return res.value.tags.reduce<Tag[]>((_tags, _tag) => {
     if (_tags.some((tagsTag) => tagsTag.tag === _tag.tag)) {
       return _tags;
     }
@@ -36,7 +37,6 @@ const tags = computed(() => {
   }, []);
 });
 console.log(tags.value);
-
 </script>
 
 <style scoped lang="sass"></style>
