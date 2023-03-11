@@ -1,7 +1,7 @@
 <template>
   <div class="bg-base">
     <Header />
-    <main>
+    <main class="pt-10">
       <div v-for="post in res?.posts" :key="post.id">
         <PostListItem
           :id="post.id"
