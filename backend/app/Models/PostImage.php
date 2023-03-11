@@ -8,5 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class PostImage extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+
+    protected $fillable = [
+        "post_id",
+        "base64",
+    ];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
