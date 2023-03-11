@@ -5,11 +5,9 @@
     role="link"
     class="w-full bg-base"
   >
-    <img
-      class="w-full max-w-md aspect-square"
-      :src="props.image"
-      alt="postImage"
-    />
+    <div class="w-screen h-[100vw]">
+      <img class="w-full max-w-md h-full object-cover" :src="props.image" alt="postImage" />
+    </div>
     <div class="flex justify-between m-2">
       <p
         class="text-main flex-1 whitespace-nowrap overflow-hidden text-ellipsis"
@@ -49,11 +47,11 @@ interface Props {
   date: string;
 }
 interface Emits {
-(e: "update"): void
+  (e: "update"): void;
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits<Emits>()
+const emit = defineEmits<Emits>();
 
 const detail = computed(() => {
   const found = props.detail.match(/([\s\S.]*?)(#[\s\S.]*)/);
@@ -65,9 +63,7 @@ const detail = computed(() => {
   if (!hashtag) {
     return { main, hashtags: [] };
   }
-  const hashtags = hashtag
-    .split("#")
-    .filter((value) => value)
+  const hashtags = hashtag.split("#").filter((value) => value);
   return { main, hashtags };
 });
 </script>
