@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :href="`/posts?${tag}`"
+    :href="`/posts?tags=${tag}`"
     tabindex="0"
     role="link"
     class="w-full max-w-xs overflow-hidden bg-base rounded-lg shadow-lg"

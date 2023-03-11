@@ -23,9 +23,19 @@
         <!-- TODO:ブックマークボタン -->
       </div>
     </div>
-    <p class="text-main text-xs m-2">
-      {{ props.detail }}
-    </p>
+    <div class="text-xs m-2">
+      <p class="text-main">
+        {{ detail.main }}
+      </p>
+      <NuxtLink
+        v-for="hashtag in detail.hashtags"
+        :href="`/posts?tags=${hashtag}`"
+        class="text-blue-400 [&+&]:ml-2"
+        @click="() => emit('update')"
+      >
+        #{{ hashtag }}
+      </NuxtLink>
+    </div>
   </NuxtLink>
 </template>
 
@@ -38,7 +48,28 @@ interface Props {
   isBookmark: boolean;
   date: string;
 }
+interface Emits {
+(e: "update"): void
+}
+
 const props = defineProps<Props>();
+const emit = defineEmits<Emits>()
+
+const detail = computed(() => {
+  const found = props.detail.match(/([\s\S.]*?)(#[\s\S.]*)/);
+  if (!found) return { main: "", hashtags: [] };
+  const main = found.at(1);
+  console.log(main);
+
+  const hashtag = found.at(2);
+  if (!hashtag) {
+    return { main, hashtags: [] };
+  }
+  const hashtags = hashtag
+    .split("#")
+    .filter((value) => value)
+  return { main, hashtags };
+});
 </script>
 
 <style scoped></style>

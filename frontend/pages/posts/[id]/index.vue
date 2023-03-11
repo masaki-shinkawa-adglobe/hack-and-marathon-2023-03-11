@@ -51,14 +51,12 @@ const carousel = ref(null);
 const handleLike = async (isLike: boolean) => {
   if (!data.value?.id) return;
   const image = data.value.images[carousel.value?.data.currentSlide.value];
-  const { data: likeResponse } = await useFetch<LikeResponse>(
-    `http://localhost/api/images/${image.id}/like`,
-    {
-      body: { isLike },
-    }
-  );
+  const res = await $fetch<LikeResponse>(`http://localhost/api/images/${image.id}/like`, {
+    method: "POST",
+    body: { isLike },
+  });
   data.value.images[carousel.value?.data.currentSlide.value].isLike =
-    likeResponse.value?.isLike ?? false;
+    res.isLike ?? false;
 };
 </script>
 

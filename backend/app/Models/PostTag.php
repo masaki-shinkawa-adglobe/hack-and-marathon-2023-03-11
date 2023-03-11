@@ -14,6 +14,11 @@ class PostTag extends Model
 
     protected $table = 'post_tags';
 
+    protected $fillable = [
+        "post_id",
+        "tag",
+    ];
+
     public function getTags(): object
     {
         return DB::table($this->table)
