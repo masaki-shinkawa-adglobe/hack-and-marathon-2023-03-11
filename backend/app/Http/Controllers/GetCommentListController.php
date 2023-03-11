@@ -21,7 +21,7 @@ class GetCommentListController extends Controller
         $response = $comments->map(function($val) {
             return [
                 'comment' => $val->comment,
-                'name' => $val->user->name,
+                'name' => $val->user->name ?? "nobody",
                 'date' => $val->created_at->format('Y-m-d H:i:s')
             ];
         });

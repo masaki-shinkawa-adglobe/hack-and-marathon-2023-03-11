@@ -9,7 +9,7 @@
     <button
       class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
       @click="submit"
-      >
+    >
       送信
     </button>
   </div>
@@ -27,9 +27,15 @@ interface PostsResponseInterface {
   postId: string;
 }
 
+interface Emits {
+  (e: "update"): void;
+}
+
 const props = defineProps<Comment>();
 const comment = ref("");
 const error = ref("");
+
+const emits = defineEmits<Emits>();
 
 const submit = async () => {
   error.value = "";
@@ -43,14 +49,14 @@ const submit = async () => {
   };
   if (!props.id) return;
   const data = await $fetch<PostsResponseInterface>(
-  `http://localhost:3001/api/posts/${props.id}/comment`,
+    `http://localhost:3001/api/posts/${props.id}/comment`,
     {
-      method: 'POST',
-      body
+      method: "POST",
+      body,
     }
   );
-  location.reload();
-}
+  emits("update");
+};
 </script>
 
 <style scoped lang="sass"></style>
