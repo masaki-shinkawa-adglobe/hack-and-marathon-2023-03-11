@@ -98,6 +98,9 @@ const handleClickSubmit = () => {
   emit("handleSubmit");
 };
 const handleClickAddTag = (tag: string) => {
+  if (props.tags.some((_tag) => _tag === tag)) {
+    return;
+  }
   emit("handleAddTags", tag);
 };
 const handleClickDeleteTag = (tag: string) => {

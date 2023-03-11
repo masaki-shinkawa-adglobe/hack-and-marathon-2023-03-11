@@ -112,11 +112,12 @@
 </template>
 
 <script lang="ts" setup>
+interface Tag {
+  tag: string;
+  image: string;
+}
 interface Response {
-  tags: {
-    tag: string;
-    image: string;
-  }[];
+  tags: Tag[];
 }
 
 const isOpen = ref(false);
@@ -124,7 +125,16 @@ const isModalOpen = ref(false);
 
 const tags = ref<string[]>([]);
 const { data } = await useFetch<Response>("http://localhost/api/tags");
-const popularTags = data.value?.tags?.map((tag) => tag.tag) ?? [];
+
+const popularTags = computed(() => {
+  if (!data.value) return [];
+  return data.value.tags.reduce<Tag[]>((_tags, _tag) => {
+    if (_tags.some((tagsTag) => tagsTag.tag === _tag.tag)) {
+      return _tags;
+    }
+    return [..._tags, _tag];
+  }, []).map(tag => tag.tag);
+});
 
 const handleModalOpen = () => {
   isModalOpen.value = !isModalOpen.value;
