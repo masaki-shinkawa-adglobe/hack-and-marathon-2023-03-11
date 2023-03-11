@@ -21,10 +21,10 @@
               class="block w-full placeholder-gray-400/70 rounded-lg border border-accent bg-white px-5 py-2.5 text-gray-700 focus:border-accent focus:outline-none focus:ring focus:ring-accent focus:ring-opacity-40"
             />
             <button
-              class="flex items-center px-4 py-2 font-medium tracking-wide text-main border border-accent capitalize transition-colors duration-300 transform bg-base rounded-lg hover:bg-base focus:outline-none focus:ring focus:ring-base focus:ring-opacity-80"
+              class="flex items-center px-2 py-2 font-medium tracking-wide text-base border border-accent capitalize transition-colors duration-300 transform bg-accent rounded-lg hover:bg-accept focus:outline-none focus:ring focus:ring-accept focus:ring-opacity-80"
               @click="() => handleAddInput()"
             >
-              <img class="w-8 h-8" src="~/assets/img/search.svg" />
+              <img class="w-8 h-8" src="~/assets/img/plus.svg" />
             </button>
           </div>
           <div class="flex-1">

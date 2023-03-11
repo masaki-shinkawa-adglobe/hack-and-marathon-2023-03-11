@@ -36,7 +36,6 @@ const tags = computed(() => {
     return [..._tags, _tag];
   }, []);
 });
-console.log(tags.value);
 </script>
 
 <style scoped lang="sass"></style>
