@@ -2,7 +2,7 @@
   <div class="bg-base">
     <Header />
     <main>
-      <div v-for="post in res.posts" :key="post.id">
+      <div v-for="post in res?.posts" :key="post.id">
         <PostListItem
           :id="post.id"
           :title="post.title"
@@ -17,34 +17,37 @@
 </template>
 
 <script lang="ts" setup>
-// TODO: API
-const res = ref({
-  posts: [
-    {
-      id: 0,
-      title: "タイトル１",
-      detail: "詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細...",
-      image: "https://placehold.jp/150x150.png",
-      isBookmark: false,
-      date: "2023-03-11-T00:00:00"
-    },
-    {
-      id: 1,
-      title: "タイトル２",
-      detail: "詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細詳細...",
-      image: "https://placehold.jp/150x150.png",
-      isBookmark: false,
-      date: "2023-03-11-T00:00:00"
-    },
-    {
-      id: 2,
-      title: "タイトル２",
-      detail: "詳細詳細詳細詳細詳細詳細詳細詳細",
-      image: "https://placehold.jp/150x150.png",
-      isBookmark: false,
-      date: "2023-03-11-T00:00:00"
-    },
-  ]
+import { LocationQueryValue } from "vue-router";
+
+interface PostsResponseInterface {
+  posts: {
+    id: number;
+    title: string;
+    detail: string;
+    image: string;
+    isBookmark: boolean;
+    date: string;
+  }[];
+}
+
+const route = useRoute();
+
+const query = computed(() => {
+  const query: any = {};
+  query.title = route.query.title?.[0]?.toString() || undefined;
+  query.isBookmark = route.query.isBookmark?.[0]?.toString() || undefined;
+  if (!route.query.tags?.length || !route.query.tags[0]?.toString()) return [];
+  for (let index = 0; index < route.query.tags.length; index++) {
+    const tag = route.query.tags[index];
+    if (tag) {
+      query[`tag[${index}]`] = tag?.toString();
+    }
+  }
+  return query;
+});
+
+const { data: res, pending } = useFetch<PostsResponseInterface>("http://localhost/api/posts", {
+  query: query.value,
 });
 </script>
 
