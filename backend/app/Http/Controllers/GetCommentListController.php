@@ -13,12 +13,12 @@ class GetCommentListController extends Controller
      *
      * @return object
      */
-    public function list(int $postId): object
+    public function list(int $postId): array
     {
         $comment = new PostComment();
 
         $response = $comment->getComments($postId);
 
-        return $response;
+        return ['comments' => $response];
     }
 }

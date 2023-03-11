@@ -11,12 +11,12 @@ class TagController extends Controller
      *
      * @return object
      */
-    public function index(): object
+    public function index(): array
     {
         $tags = new PostTag();
 
         $response = $tags->getTags();
 
-        return $response;
+        return ['tags' => $response];
     }
 }
