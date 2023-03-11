@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:3001/api/
+###
+# ブックマーク切り替え
+POST {{baseUrl}}posts/1/bookmark2 HTTP/1.1
+content-type: application/json
+
+{
+    "isBookmark" : false
+}
+
+
+###
+# いいね切り替え
+POST {{baseUrl}}images/1/like HTTP/1.1
+content-type: application/json
+
+{
+    "isLike" : false
+}
+
+###
+# 通常
+POST {{baseUrl}}posts/1/comment HTTP/1.1
+content-type: application/json
+
+{
+    "comment" : "いいね！！！"
+}
+
+###
+# 通常
+GET {{baseUrl}}posts/1/comment HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+# 通常
+GET {{baseUrl}}posts/tags HTTP/1.1
+content-type: application/json
+
+{
+}
