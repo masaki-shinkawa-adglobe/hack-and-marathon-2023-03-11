@@ -1,7 +1,7 @@
 <template>
   <div class="bg-base">
     <Header />
-    <div class="grid grid-cols-2 gap-2 m-2 pt-10">
+    <div class="grid grid-cols-2 gap-2 mx-2 pt-10">
       <template v-if="!pending">
         <HashTagCard
           v-for="tag in res.tags"
