@@ -11,13 +11,18 @@ class PostTag extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
+
     protected $table = 'post_tags';
 
     public function getTags(): object
     {
         return DB::table($this->table)
-        ->whereNull('deleted_at')
-        ->get();
+            ->whereNull('deleted_at')
+            ->get();
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
     }
 }
