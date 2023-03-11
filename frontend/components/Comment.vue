@@ -21,6 +21,7 @@ interface Comment {
 const props = defineProps<Comment>();
 
 const date = computed(() => {
+  console.log(props.date);
   return format(new Date(props.date), "yyyy/MM/dd HH:mm:ss");
 });
 </script>
