@@ -8,15 +8,24 @@
     <img
       class="w-full max-w-md aspect-square"
       :src="props.image"
-      alt="postImage" />
-    <div class="text-main m-2">
-      {{props.title}}
+      alt="postImage"
+    />
+    <div class="flex justify-between m-2">
+      <p
+        class="text-main flex-1 whitespace-nowrap overflow-hidden text-ellipsis"
+      >
+        {{ props.title }}
+      </p>
+      <div class="ml-2 flex gap-2">
+        <NuxtLink :href="`/posts/${id}/comments`">
+          <img src="~/assets/img/comment.svg" class="w-4" />
+        </NuxtLink>
+        <!-- TODO:ブックマークボタン -->
+      </div>
     </div>
-    <!-- TODO:コメントボタン -->
-    <!-- TODO:ブックマークボタン -->
-    <div class="text-main text-xs m-2">
-      {{props.detail}}
-    </div>
+    <p class="text-main text-xs m-2">
+      {{ props.detail }}
+    </p>
   </NuxtLink>
 </template>
 
