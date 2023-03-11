@@ -11,7 +11,7 @@
       v-else
       ref="carousel"
       :items-to-show="1"
-      class="bg-main h-[100vw]"
+      class="bg-main h-[100vw] pt-10"
     >
       <slide v-for="image in images" :key="image">
         <div class="aspect-square w-screen flex items-center bg-main">
@@ -26,7 +26,7 @@
         />
       </template>
     </Carousel>
-    <div class="m-2">
+    <div class="m-12">
       <label
         class="inline-block text-center px-6 py-2 w-full relative font-medium tracking-wide border-accent border-2 text-main capitalize transition-colors duration-300 transform bg-base rounded-lg hover:bg-base focus:outline-none focus:ring focus:ring-accent focus:ring-opacity-80"
       >
