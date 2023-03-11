@@ -66,29 +66,29 @@
               ? 'translate-x-0 opacity-100 '
               : 'opacity-0 -translate-x-full',
           ]"
-          class="absolute inset-x-0 z-20 w-full mt-4 px-6 py-4 transition-all duration-300 ease-in-out bg-white lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"
+          class="absolute inset-x-0 z-20 w-full mt-4 px-6 py-4 transition-all duration-300 ease-in-out bg-base lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"
         >
           <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
             <NuxtLink
               href="/"
-              class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100"
+              class="px-3 py-2 mx-3 mt-2 text-main transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-base"
               >人気ハッシュタグ一覧</NuxtLink
             >
             <NuxtLink
               href="/posts/upload"
-              class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100"
+              class="px-3 py-2 mx-3 mt-2 text-main transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-base"
               >アップロード</NuxtLink
             >
             <NuxtLink
               href="/posts/ranking"
-              class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100"
+              class="px-3 py-2 mx-3 mt-2 text-main transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-base"
               >ランキング</NuxtLink
             >
           </div>
 
           <div class="flex items-center mt-4 lg:mt-0">
             <button
-              class="hidden mx-4 text-main transition-colors duration-300 transform lg:block hover:text-gray-700 focus:text-gray-700 focus:outline-none"
+              class="hidden mx-4 text-main transition-colors duration-300 transform lg:block hover:text-main focus:text-main focus:outline-none"
               aria-label="show notifications"
             >
               <svg
